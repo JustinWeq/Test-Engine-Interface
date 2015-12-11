@@ -357,7 +357,71 @@ namespace Test_Engine_Interface.Script
                             //data deifnes an integer
                             writer.Write((byte)Type.INT);
                             //dont bother writing the data since there is none
+                            break;
                         }
+                    case Type.LITERAL:
+                        {
+                            //data defines a literal
+                            writer.Write((byte)Type.LITERAL);
+                            //get what is in it and then write it
+                            ARG argt = (ARG)args[i].m_data;
+                            //check to see if its a string and if it is write a string type and then the size of the string,
+                            // note string must not be longer then 256
+                            if(argt.m_type == Type.STRING)
+                            {
+                                string str = (string)argt.m_data;
+                                writer.Write((byte)Type.STRING);
+                                writer.Write((byte)str.Count());
+                                writer.Write(str);
+                            }
+                            else
+                            {
+                                //it must have been a nother type
+                                writer.Write((byte)argt.m_type);
+                                writer.Write((float)argt.m_data);
+                            }
+                            break;
+                        }
+                    case Type.LONG:
+                        {
+                            //data defines a long
+                            writer.Write((byte)Type.LONG);
+                            //write the longs address
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.OPERATOR:
+                        {
+                            //wrtie the operator and its type
+                            writer.Write((byte)Type.OPERATOR);
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.SHORT:
+                        {
+                            //data defines a short
+                            writer.Write((byte)Type.SHORT);
+                            //write its address
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.STRING:
+                        {
+                            //data defines a string
+                            writer.Write((byte)Type.STRING);
+                            //write its address
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.WHILE:
+                        {
+                            //data defines a while loop
+                            writer.Write((byte)Type.WHILE);
+                            //write its address
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+
                 }
             }
 
@@ -466,21 +530,18 @@ namespace Test_Engine_Interface.Script
                         narg.m_data = go.getFloat(arg);
                         break;
                     }
-
                 case GameObject.TYPE.INTEGER:
                     {
                         narg.m_type = Type.INT;
                         narg.m_data = go.getInteger(arg);
                         break;
                     }
-
                 case GameObject.TYPE.SHORT:
                     {
                         narg.m_type = Type.SHORT;
                         narg.m_data = go.getShort(arg);
                         break;
                     }
-
                 case GameObject.TYPE.STRING:
                     {
                         narg.m_type = Type.STRING;
