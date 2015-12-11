@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test_Engine_Interface.Object;
-namespace Test_Engine_Interface.Script
+namespace Test_Engine_Interface.JR_Script
 {
     //Script-- a static class that contains methods and propertys for
     // exporting scripts in a binary format
@@ -63,7 +63,6 @@ namespace Test_Engine_Interface.Script
             List<byte> binlist = new List<byte>();
             //set up list of data to be written out to the script
             List<ARG> args = new List<ARG>();
-            
 
             //break script into lines
             string[] lines = script.Split('\n');

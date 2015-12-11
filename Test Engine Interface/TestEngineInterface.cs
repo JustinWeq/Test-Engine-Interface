@@ -83,7 +83,7 @@ namespace Test_Engine_Interface
         }
 
         //updaeObject-- updates the passed in object, meant to be used by object editor windows
-        public void updateObject(GameObject gameObject, int index);
+        public void updateObject(GameObject gameObject, int index)
         {
 
         }

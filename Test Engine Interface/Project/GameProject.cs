@@ -2,6 +2,7 @@
 using Test_Engine_Interface.Object;
 using Test_Engine_Interface.Level;
 using Test_Engine_Interface.Sound;
+using Test_Engine_Interface.JR_Script;
 namespace Test_Engine_Interface.Project
 {
     //GameProject-- a class that contains methods and propertys for a game
@@ -33,7 +34,7 @@ namespace Test_Engine_Interface.Project
             //textures- a List that contains the various textures for the game project
             public List< string> textures;
             //scripts- a List that contains the various scripts for the game project
-            public List<Script.Script> scripts;
+            public List<string> scripts;
             public List<GameLevel> levels;
             public List<string> models;
             public List<GameSound> sounds;
@@ -93,7 +94,7 @@ namespace Test_Engine_Interface.Project
             m_files.levels = new List<GameLevel>();
             m_files.models = new List<string>();
             m_files.objects = new List<GameObject>();
-            m_files.scripts = new List<Script.Script>();
+            m_files.scripts = new List<string>();
             m_files.sounds = new List<GameSound>();
             m_files.textures = new List<string>();
         }
@@ -139,7 +140,7 @@ namespace Test_Engine_Interface.Project
             m_files.scripts.RemoveAt(index);
         }
 
-        public void addScript(Script.Script script)
+        public void addScript(string script)
         {
             m_files.scripts.Add(script);
         }
