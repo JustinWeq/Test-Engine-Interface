@@ -312,7 +312,51 @@ namespace Test_Engine_Interface.Script
                             //data defines a char(not literal)
                             writer.Write((byte)Type.CHAR);
                             //write the address of the char
-                            writer.Write()
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.DO:
+                        {
+                            //data defines a do loop
+                            writer.Write((byte)Type.DO);
+                            //do not bother writing data since there is none
+                            break;
+                        }
+                    case Type.DOUBLE:
+                        {
+                            //data defines a double
+                            writer.Write((byte)Type.DOUBLE);
+                            //write the address of the double;
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.FLOAT:
+                        {
+                            //data defines a float(not literal)
+                            writer.Write((byte)Type.FLOAT);
+                            //write the address of the float
+                            writer.Write((byte)args[i].m_data);
+                            break;
+                        }
+                    case Type.GLOBAL:
+                        {
+                            //data defines a global
+                            writer.Write((byte)Type.GLOBAL);
+                            //dont bother writing the data since there is none
+                            break;
+                        }
+                    case Type.IF:
+                        {
+                            //data deinfes an if statement
+                            writer.Write((byte)Type.IF);
+                            //dont bother writing the data since there is none
+                            break;
+                        }
+                    case Type.INT:
+                        {
+                            //data deifnes an integer
+                            writer.Write((byte)Type.INT);
+                            //dont bother writing the data since there is none
                         }
                 }
             }
