@@ -52,6 +52,17 @@ namespace Test_Engine_Interface.Object
             m_varTypes.Add(name, TYPE.STRING);
         }
 
+        public void editString(string name,string newValue)
+        {
+
+        }
+
+        public bool containsData(string name)
+        {
+            return m_varTypes.ContainsKey(name);
+        }
+
+
         //addInteger-- adds a new integer to the dictionary of integers
         //name- the name of the new string to add
         public void addInteger(string name)

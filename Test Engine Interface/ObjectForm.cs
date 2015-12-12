@@ -46,16 +46,98 @@ namespace Test_Engine_Interface
                 //go trough the list and see if its an argument
                 switch(args[0])
                 {
-                    case "int"
+                    case "int":
                         {
-                            //add new integer the the object if it does not already exist
-                            if (m_gameObject.getType(args[1]) == null)
+                            //add new data to the object if it does not already exist
+                            if (!m_gameObject.containsData(args[1]))
                             {
-                                //add a new inter
+                                //it does not exist so add it
+                                m_gameObject.addInteger(args[1]);
                             }
+                            break;
                         }
+                    case "short":
+                        {
+                            //add new data to the object if it does not already exist
+                            if (!m_gameObject.containsData(args[1]))
+                            {
+                                //it does not exist so add it
+                                m_gameObject.addShort(args[1]);
+                            }
+                            break;
+                        }
+                    case "double":
+                        {
+                            //add new data to the object if it does not already exist
+                            if (!m_gameObject.containsData(args[1]))
+                            {
+                                //it does not exist so add it
+                                m_gameObject.addDoubles(args[1]);
+                            }
+                            break;
+                        }
+                    case "float":
+                        {
+                            //add new data if it does not already exist
+                            if(!m_gameObject.containsData(args[1]))
+                            {
+                                //it does not exist so add it
+                                m_gameObject.addFloat(args[1]);
+                            }
+                            break;
+                        }
+                    case "byte":
+                        {
+                            //add new data if it does not already exist
+                            if(!m_gameObject.containsData(args[1]))
+                            {
+                                //it does nto exist so add it
+                                m_gameObject.addByte(args[1]);
+
+                            }
+                            break;
+                        }
+                    case "long":
+                        {
+                            //add new data to the object if it does not already exist
+                            if(!m_gameObject.containsData(args[1]))
+                            {
+                                //it does not exist so add it
+                                m_gameObject.addLong(args[1]);
+                            }
+                            break;
+                        }
+                    case "string":
+                        {
+                            //add new data to the object if it does not already exist
+                            if(!m_gameObject.containsData(args[1]))
+                            {
+                                //it does not exist so add it
+                                m_gameObject.addString(args[1]);
+                            }
+                            break;
+                        }
+                    case "char":
+                        {
+                            //add new data to the object if it does not exist already
+                            if(!m_gameObject.containsData(args[1]))
+                            {
+                                //it does nto exist so add it
+                                m_gameObject.addChar(args[1]);
+                            }
+                            break;
+                        }
+
                 }
             }
+            //done with object so edit it
+            //dispose of this form
+            this.Dispose();
+        }
+
+        private void cancel_button_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

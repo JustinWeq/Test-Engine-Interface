@@ -51,10 +51,9 @@ namespace Test_Engine_Interface
         private void project_treeView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             //check to see which thing is selected and then open a menu accordingly
-            if(e.Button == MouseButtons.Right)
-            {
-                
-            }
+            //open object editor
+            ObjectForm of = new ObjectForm();
+            of.Visible = true;
         }
 
         private void objectToolStripMenuItem_Click(object sender, EventArgs e)
