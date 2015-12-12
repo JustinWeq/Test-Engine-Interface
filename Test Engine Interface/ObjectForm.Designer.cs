@@ -40,6 +40,7 @@
             this.image_pictureBox = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.name_textBox = new System.Windows.Forms.TextBox();
+            this.in_rtxbox = new System.Windows.Forms.RichTextBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.image_pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +54,7 @@
             this.accept_button.TabIndex = 0;
             this.accept_button.Text = "Accept";
             this.accept_button.UseVisualStyleBackColor = true;
+            this.accept_button.Click += new System.EventHandler(this.accept_button_Click);
             // 
             // cancel_button
             // 
@@ -159,11 +161,20 @@
             this.name_textBox.Size = new System.Drawing.Size(148, 20);
             this.name_textBox.TabIndex = 9;
             // 
+            // in_rtxbox
+            // 
+            this.in_rtxbox.Location = new System.Drawing.Point(575, 13);
+            this.in_rtxbox.Name = "in_rtxbox";
+            this.in_rtxbox.Size = new System.Drawing.Size(697, 502);
+            this.in_rtxbox.TabIndex = 12;
+            this.in_rtxbox.Text = "";
+            // 
             // ObjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 527);
+            this.ClientSize = new System.Drawing.Size(1284, 527);
+            this.Controls.Add(this.in_rtxbox);
             this.Controls.Add(this.name_textBox);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.image_pictureBox);
@@ -198,5 +209,6 @@
         private System.Windows.Forms.PictureBox image_pictureBox;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox name_textBox;
+        private System.Windows.Forms.RichTextBox in_rtxbox;
     }
 }

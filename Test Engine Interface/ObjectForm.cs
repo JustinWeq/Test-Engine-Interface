@@ -32,7 +32,30 @@ namespace Test_Engine_Interface
 
         }
 
-
-        
+        private void accept_button_Click(object sender, EventArgs e)
+        {
+            string data;
+            data = in_rtxbox.Text;
+            //split data into lines
+            string[] lines = data.Split('\n');
+            //parse the arguments in the object text box and add them to the object
+            foreach (string line in lines)
+            {
+                //split the line into arguments
+                string[] args = line.Split(' ');
+                //go trough the list and see if its an argument
+                switch(args[0])
+                {
+                    case "int"
+                        {
+                            //add new integer the the object if it does not already exist
+                            if (m_gameObject.getType(args[1]) == null)
+                            {
+                                //add a new inter
+                            }
+                        }
+                }
+            }
+        }
     }
 }
