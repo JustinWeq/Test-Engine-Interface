@@ -24,6 +24,13 @@ namespace Test_Engine_Interface.Object
             BOOL,
         }
 
+        public enum ObjectType
+        {
+            TWODIMENSIONAL,
+            THREEDIMENSIONAL,
+            CONTROL
+        }
+
         //defualt constructor creates a new instance of GameObject
         // with defualt parameters
         
@@ -52,6 +59,16 @@ namespace Test_Engine_Interface.Object
 
             //add new typs to types
             m_varTypes.Add(name, TYPE.STRING);
+        }
+
+        public void setObjectType(ObjectType type)
+        {
+            m_type = type;
+        }
+
+        public ObjectType getType()
+        {
+            return m_type;
         }
 
         //getList-- returns the dictionary for the requested data
@@ -130,6 +147,8 @@ namespace Test_Engine_Interface.Object
             //add new typs to types
             m_varTypes.Add(name, TYPE.INTEGER);
         }
+
+        
 
 
         //addDouble-- adds a new double the the dictionary of doubles
@@ -355,5 +374,6 @@ namespace Test_Engine_Interface.Object
         /// the name of the object
         /// </summary>
         private string m_name;
+        private ObjectType m_type;
     }
 }
