@@ -110,6 +110,49 @@ namespace Test_Engine_Interface
             GameObject newGameObject = new GameObject();
             string data;
             data = in_rtxbox.Text;
+            //get the type of the object
+            if(controller_radioButton.Checked)
+            {
+                //its a control so set the new objects type and add no extra data
+                GameObject.ObjectType type = GameObject.ObjectType.CONTROL;
+                newGameObject.setObjectType(type);
+            }
+            else
+            if(radioButton2D.Checked)
+            {
+                GameObject.ObjectType type = GameObject.ObjectType.TWODIMENSIONAL;
+                //set object to be two dimensional
+                newGameObject.setObjectType(type);
+                //add nesssary two dimensional data
+                newGameObject.addFloat("x");
+                newGameObject.addFloat("y");
+                newGameObject.addFloat("direction");
+                newGameObject.addFloat("speed");
+                newGameObject.addFloat("image_angle");
+                newGameObject.addFloat("height");
+                newGameObject.addFloat("width");
+                newGameObject.addFloat("red");
+                newGameObject.addFloat("green");
+                newGameObject.addFloat("blue");
+                newGameObject.addFloat("alpha");
+                newGameObject.addFloat("uv_add");
+                newGameObject.addFloat("uv_multiply");
+                newGameObject.addFloat("gravity_direction");
+                newGameObject.addFloat("gravity_speed");
+                newGameObject.addFloat("friction");
+            }
+            else
+            if(radioButton3D.Checked)
+            {
+                GameObject.ObjectType type = GameObject.ObjectType.THREEDIMENSIONAL;
+                newGameObject.setObjectType(type);
+            }
+            else
+            {
+                //its a control by defualt so set the new objects type and add no extra data
+                GameObject.ObjectType type = GameObject.ObjectType.CONTROL;
+                newGameObject.setObjectType(type);
+            }
             //split data into lines
             string[] lines = data.Split('\n');
             //parse the arguments in the object text box and add them to the object
@@ -207,6 +250,8 @@ namespace Test_Engine_Interface
 
             //set the name of the object
             newGameObject.setName(name_textBox.Text);
+            //now get the type of the object selected so it can be constructed accordingly
+
             //done with object so edit it
             m_parent.updateObject(newGameObject, m_index);
             //dispose of this form

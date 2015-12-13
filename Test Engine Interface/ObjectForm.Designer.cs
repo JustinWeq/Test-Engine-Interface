@@ -30,7 +30,7 @@
         {
             this.accept_button = new System.Windows.Forms.Button();
             this.cancel_button = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.type_flpanel = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton3D = new System.Windows.Forms.RadioButton();
             this.radioButton2D = new System.Windows.Forms.RadioButton();
             this.controller_radioButton = new System.Windows.Forms.RadioButton();
@@ -41,7 +41,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.name_textBox = new System.Windows.Forms.TextBox();
             this.in_rtxbox = new System.Windows.Forms.RichTextBox();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.type_flpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.image_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,17 +67,17 @@
             this.cancel_button.UseVisualStyleBackColor = true;
             this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
-            // flowLayoutPanel1
+            // type_flpanel
             // 
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel1.Controls.Add(this.radioButton3D);
-            this.flowLayoutPanel1.Controls.Add(this.radioButton2D);
-            this.flowLayoutPanel1.Controls.Add(this.controller_radioButton);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 157);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(166, 100);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.type_flpanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.type_flpanel.Controls.Add(this.radioButton3D);
+            this.type_flpanel.Controls.Add(this.radioButton2D);
+            this.type_flpanel.Controls.Add(this.controller_radioButton);
+            this.type_flpanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.type_flpanel.Location = new System.Drawing.Point(12, 157);
+            this.type_flpanel.Name = "type_flpanel";
+            this.type_flpanel.Size = new System.Drawing.Size(166, 100);
+            this.type_flpanel.TabIndex = 2;
             // 
             // radioButton3D
             // 
@@ -182,14 +182,14 @@
             this.Controls.Add(this.collision_label);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.type_label);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.type_flpanel);
             this.Controls.Add(this.cancel_button);
             this.Controls.Add(this.accept_button);
             this.Name = "ObjectForm";
             this.Text = "Object Editor";
             this.Load += new System.EventHandler(this.ObjectForm_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.type_flpanel.ResumeLayout(false);
+            this.type_flpanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.image_pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -200,7 +200,7 @@
 
         private System.Windows.Forms.Button accept_button;
         private System.Windows.Forms.Button cancel_button;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel type_flpanel;
         private System.Windows.Forms.RadioButton radioButton3D;
         private System.Windows.Forms.RadioButton radioButton2D;
         private System.Windows.Forms.RadioButton controller_radioButton;
