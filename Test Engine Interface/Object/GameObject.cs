@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Test_Engine_Interface.Object
 {
     //a simple class that contains methods and properts for the game object definition
+    [Serializable]
     public class GameObject
     {
 
@@ -25,6 +26,7 @@ namespace Test_Engine_Interface.Object
 
         //defualt constructor creates a new instance of GameObject
         // with defualt parameters
+        
         public GameObject()
         {
             //initalize lists

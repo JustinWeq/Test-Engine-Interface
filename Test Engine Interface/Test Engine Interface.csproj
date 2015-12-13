@@ -55,6 +55,7 @@
     <Compile Include="Object\GameObject.cs" />
     <Compile Include="Project\GameProject.cs" />
     <Compile Include="Script\Script.cs" />
+    <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Sound\GameSound.cs" />
     <Compile Include="TestEngineInterface.cs">
       <SubType>Form</SubType>

@@ -3,12 +3,17 @@ using Test_Engine_Interface.Object;
 using Test_Engine_Interface.Level;
 using Test_Engine_Interface.Sound;
 using Test_Engine_Interface.JR_Script;
+using System;
+
 namespace Test_Engine_Interface.Project
 {
+
     //GameProject-- a class that contains methods and propertys for a game
-    class GameProject
+    [Serializable]
+    public class GameProject
     {
         //GameData-- The data for the game,such as defualt settings
+        [Serializable]
         public struct GameData
         {
             public enum AA
@@ -27,6 +32,7 @@ namespace Test_Engine_Interface.Project
         }
 
         //GameFiles-- the structure that contans information for the related files of the game
+        [Serializable]
         public struct GameFiles
         {
             //objects- a List that contains the various objects for the game project
@@ -42,6 +48,7 @@ namespace Test_Engine_Interface.Project
         }
 
         //ProjectSettings-- the settings for the project
+        [Serializable]
         public struct ProjectSettings
         {
             //ReleaseType-- a enum that determine the release type

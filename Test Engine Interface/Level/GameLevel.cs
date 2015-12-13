@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Test_Engine_Interface.Level
 {
-    class GameLevel
+    [Serializable]
+    public class GameLevel
     {
     }
 }

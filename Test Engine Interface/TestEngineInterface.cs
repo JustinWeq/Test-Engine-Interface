@@ -11,6 +11,7 @@ using Test_Engine_Interface.Project;
 using Test_Engine_Interface.Object;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using Test_Engine_Interface.Serialization;
 
 namespace Test_Engine_Interface
 {
@@ -24,6 +25,7 @@ namespace Test_Engine_Interface
         {
             InitializeComponent();
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -77,8 +79,10 @@ namespace Test_Engine_Interface
                 TreeNode node;
                 //delete the selected node
                 if(( node = project_treeView.SelectedNode) != null) node.Remove();
-               
+
+
                 //delete it from the project as well
+                project.deleteObject(node.Index);
                 //check to see which section is selected to delete it
             }
         }
@@ -117,11 +121,18 @@ namespace Test_Engine_Interface
                 }
             }
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(m_filePath + ".tprg",
-                FileMode.Create, FileAccess.Write, FileShare.None);
+            Serializer serializer = new Serializer();
+            List<string> objects = new List<string>();
+            for (int i = 0; i < project_treeView.Nodes.Count; i++)
+            {
+                objects.Add(project_treeView.Nodes[i].Text);
+            }
+            serializer.setObjects(objects.ToArray());
+            serializer.setProject(project);
+            //serialize
+            serializer.serialize(m_filePath + ".tprj");
 
-            formatter.Serialize(stream, this);
+            
         }
 
         public void serializeAs()
@@ -143,19 +154,78 @@ namespace Test_Engine_Interface
                 return;
             }
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(filepath + ".tprg",
-                FileMode.Create, FileAccess.Write, FileShare.None);
-
-            formatter.Serialize(stream, this);
+            Serializer serializer = new Serializer();
+            List<string> objects = new List<string>();
+            for(int i = 0;i < project_treeView.Nodes.Count;i++)
+            {
+                objects.Add(project_treeView.Nodes[i].Text);
+            }
+            serializer.setObjects(objects.ToArray());
+            serializer.setProject(project);
+            //serialize
+            serializer.serialize(filepath + ".tprj");
         }
 
         public void open()
         {
+            DialogResult result = MessageBox.Show("Are you sure you want to load?(any unsaved progress will be lost)", "Confirmation", MessageBoxButtons.OKCancel);
+            if(result == DialogResult.Cancel)
+            {
+                return;
+            }
             //open the file dialog
             string filepath;
             OpenFileDialog open = new OpenFileDialog();
+            result = open.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                Serializer serializer = new Serializer();
+                serializer.Unserialize(open.FileName);
+                copy(serializer);
+            }
         
+        }
+
+        public void copy(Serializer serializer)
+        {
+            //copy info from on to another
+            this.project = serializer.getProject();
+            //now copy each of the objects into the list of nodes
+            foreach(string str in serializer.getObjects())
+            {
+                project_treeView.Nodes.Add(new TreeNode(str));
+            }
+            //data is now copied
+        }
+
+        private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //open
+            open();
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //save 
+            serialize();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            serializeAs();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to start a new project?(any unsaved progress will be lost)", "Confirmation", MessageBoxButtons.OKCancel);
+            if(result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //clear the form
+            project_treeView.Nodes.Clear();
+            project = new GameProject();
         }
     }
 }

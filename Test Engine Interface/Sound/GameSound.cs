@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Test_Engine_Interface.Sound
 {
-    class GameSound
+    [Serializable]
+    public class GameSound
     {
     }
 }
