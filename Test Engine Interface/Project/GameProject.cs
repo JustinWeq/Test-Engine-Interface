@@ -124,6 +124,16 @@ namespace Test_Engine_Interface.Project
             m_files.objects.Add(gameObject);
         }
 
+        public void updateObject(GameObject gameObject,int index)
+        {
+            m_files.objects[index] = gameObject;
+        }
+
+        public GameObject getObject(int index)
+        {
+            return m_files.objects[index];
+        }
+
 
         public void deleteTexture(int index)
         {

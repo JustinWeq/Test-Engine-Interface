@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Test_Engine_Interface.Object;
 namespace Test_Engine_Interface
 {
+    
     public partial class ObjectForm : Form
     {
         //instance vars
@@ -17,23 +18,96 @@ namespace Test_Engine_Interface
         TestEngineInterface m_parent;
         int m_index;
 
-        public ObjectForm(GameObject gameObject,int index,TestEngineInterface parent)
+        public ObjectForm( GameObject gameObject,int index,TestEngineInterface parent)
         {
             InitializeComponent();
             //store gameObject
             m_gameObject = gameObject;
-            //stroe index
+            //store index
             m_index = index;
             m_parent = parent;
         }
 
         private void ObjectForm_Load(object sender, EventArgs e)
         {
+            //read in the data for the object
+            //set up paralels array for names and data
+            List<string> types = new List<string>();
+            List<string> names = new List<string>();
+            //get bytes
+            foreach(string name in m_gameObject.getList("byte").Keys)
+            {
+                types.Add("byte");
+                names.Add(name);
+            }
+            //get shorts
+            foreach(string name in m_gameObject.getList("short").Keys)
+            {
+                types.Add("short");
+                names.Add(name);
+            }
+            //get integers
+            foreach(string name in m_gameObject.getList("int").Keys)
+            {
+                types.Add("int");
+                names.Add(name);
+            }
+            //get longs
+            foreach(string name in m_gameObject.getList("long").Keys)
+            {
+                types.Add("long");
+                names.Add(name);
+            }
+            //get floats
+            foreach(string name in m_gameObject.getList("float").Keys)
+            {
+                types.Add("float");
+                names.Add(name);
+            }
+            //get doubles
+            foreach(string name in m_gameObject.getList("double").Keys)
+            {
+                types.Add("float");
+                names.Add(name);
+            }
+            //get bools
+            foreach(string name in m_gameObject.getList("bool").Keys)
+            {
+                types.Add("bool");
+                names.Add(name);
+            }
+            //get strings
+            foreach(string name in m_gameObject.getList("string").Keys)
+            {
+                types.Add("string");
+                names.Add(name);
+            }
+            //get chars
+            foreach(string name in m_gameObject.getList("char").Keys)
+            {
+                types.Add("char");
+                names.Add(name);
+            }
+            StringBuilder strBuilder = new StringBuilder();
+            //now build the text
+            for(int i = 0;i < names.Count;i++)
+            {
+                strBuilder.Append(types[i] + " " + names[i] + "\n");
+            }
+
+            //now set the text in the form
+            in_rtxbox.Text = strBuilder.ToString();
+
+            //set the name of the text box
+            name_textBox.Text = m_gameObject.getName();
+
+
 
         }
 
         private void accept_button_Click(object sender, EventArgs e)
         {
+            GameObject newGameObject = new GameObject();
             string data;
             data = in_rtxbox.Text;
             //split data into lines
@@ -49,50 +123,50 @@ namespace Test_Engine_Interface
                     case "int":
                         {
                             //add new data to the object if it does not already exist
-                            if (!m_gameObject.containsData(args[1]))
+                            if (!newGameObject.containsData(args[1]))
                             {
                                 //it does not exist so add it
-                                m_gameObject.addInteger(args[1]);
+                                newGameObject.addInteger(args[1]);
                             }
                             break;
                         }
                     case "short":
                         {
                             //add new data to the object if it does not already exist
-                            if (!m_gameObject.containsData(args[1]))
+                            if (!newGameObject.containsData(args[1]))
                             {
                                 //it does not exist so add it
-                                m_gameObject.addShort(args[1]);
+                                newGameObject.addShort(args[1]);
                             }
                             break;
                         }
                     case "double":
                         {
                             //add new data to the object if it does not already exist
-                            if (!m_gameObject.containsData(args[1]))
+                            if (!newGameObject.containsData(args[1]))
                             {
                                 //it does not exist so add it
-                                m_gameObject.addDoubles(args[1]);
+                                newGameObject.addDoubles(args[1]);
                             }
                             break;
                         }
                     case "float":
                         {
                             //add new data if it does not already exist
-                            if(!m_gameObject.containsData(args[1]))
+                            if(!newGameObject.containsData(args[1]))
                             {
                                 //it does not exist so add it
-                                m_gameObject.addFloat(args[1]);
+                                newGameObject.addFloat(args[1]);
                             }
                             break;
                         }
                     case "byte":
                         {
                             //add new data if it does not already exist
-                            if(!m_gameObject.containsData(args[1]))
+                            if(!newGameObject.containsData(args[1]))
                             {
                                 //it does nto exist so add it
-                                m_gameObject.addByte(args[1]);
+                                newGameObject.addByte(args[1]);
 
                             }
                             break;
@@ -100,37 +174,41 @@ namespace Test_Engine_Interface
                     case "long":
                         {
                             //add new data to the object if it does not already exist
-                            if(!m_gameObject.containsData(args[1]))
+                            if(!newGameObject.containsData(args[1]))
                             {
                                 //it does not exist so add it
-                                m_gameObject.addLong(args[1]);
+                                newGameObject.addLong(args[1]);
                             }
                             break;
                         }
                     case "string":
                         {
                             //add new data to the object if it does not already exist
-                            if(!m_gameObject.containsData(args[1]))
+                            if(!newGameObject.containsData(args[1]))
                             {
                                 //it does not exist so add it
-                                m_gameObject.addString(args[1]);
+                                newGameObject.addString(args[1]);
                             }
                             break;
                         }
                     case "char":
                         {
                             //add new data to the object if it does not exist already
-                            if(!m_gameObject.containsData(args[1]))
+                            if(!newGameObject.containsData(args[1]))
                             {
                                 //it does nto exist so add it
-                                m_gameObject.addChar(args[1]);
+                                newGameObject.addChar(args[1]);
                             }
                             break;
                         }
 
                 }
             }
+
+            //set the name of the object
+            newGameObject.setName(name_textBox.Text);
             //done with object so edit it
+            m_parent.updateObject(newGameObject, m_index);
             //dispose of this form
             this.Dispose();
         }

@@ -39,23 +39,78 @@ namespace Test_Engine_Interface.Object
             m_strings = new Dictionary<string, byte>();
             m_varTypes = new Dictionary<string, TYPE>();
         }
-        
+
         //methods
 
         //addString--adds a new string to the dictionary of strings
         public void addString(string name)
         {
             //add new string to dictionary of string
-            m_strings.Add(name,(byte)m_strings.Count);
+            m_strings.Add(name, (byte)m_strings.Count);
 
             //add new typs to types
             m_varTypes.Add(name, TYPE.STRING);
         }
 
-        public void editString(string name,string newValue)
+        //getList-- returns the dictionary for the requested data
+        //type- the type to get (pick from the following)
+        // char,
+        // string,
+        // int,
+        // byte,
+        // short,
+        // long,
+        // float,
+        // bool,
+        // double
+        public Dictionary<string,byte> getList(string type)
         {
+            //return the requested type, if there is none return null
+            switch(type)
+            {
+                case "char":
+                    {
+                        return m_chars;
+                    }
+                case "string":
+                    {
+                        return m_strings;
+                    }
+                case "int":
+                    {
+                        return m_integers;
+                    }
+                case "byte":
+                    {
+                        return m_bytes;
+                    }
+                case "short":
+                    {
+                        return m_shorts;
+                    }
+                case "long":
+                    {
+                        return m_longs;
+                    }
+                case "float":
+                    {
+                        return m_floats;
+                    }
+                case "bool":
+                    {
+                        return m_bools;
+                    }
+                case "double":
+                    {
+                        return m_doubles;
+                    }
+        
+            }
 
+            return null;
         }
+
+
 
         public bool containsData(string name)
         {
@@ -222,16 +277,81 @@ namespace Test_Engine_Interface.Object
             return m_varTypes[name];
         }
 
+        /// <summary>
+        /// set name
+        /// sets the name of the object
+        /// </summary>
+        /// <param name="name"> the new name of the object</param>
+        public void setName(string name)
+        {
+            m_name = name;
+        }
+
+        /// <summary>
+        /// getName
+        /// returns the name of the object
+        /// </summary>
+        /// <returns> the name of the object</returns>
+        public string getName()
+        {
+            return m_name;
+        }
+
         //instance data
+        /// <summary>
+        /// strings
+        /// the dictionary of strings
+        /// </summary>
         private Dictionary<string, byte> m_strings;
+        /// <summary>
+        /// integers
+        /// the dictionary of integers
+        /// </summary>
         private Dictionary<string, byte> m_integers;
+        /// <summary>
+        /// doubles
+        /// the dictionary of doubles
+        /// </summary>
         private Dictionary<string, byte> m_doubles;
+        /// <summary>
+        /// floats
+        /// the dictionary of floats
+        /// </summary>
         private Dictionary<string, byte> m_floats;
+        /// <summary>
+        /// longs
+        /// the dictionary of longs
+        /// </summary>
         private Dictionary<string, byte> m_longs;
+        /// <summary>
+        /// bools
+        /// the dictionary of bools
+        /// </summary>
         private Dictionary<string, byte> m_bools;
+        /// <summary>
+        /// shorts
+        /// the dictionary of shorts
+        /// </summary>
         private Dictionary<string, byte> m_shorts;
+        /// <summary>
+        /// chars
+        /// the dictionary of chars
+        /// </summary>
         private Dictionary<string, byte> m_chars;
+        /// <summary>
+        /// bytes
+        /// the dictionary of bytes
+        /// </summary>
         private Dictionary<string, byte> m_bytes;
+        /// <summary>
+        /// varTypes
+        /// the dictionary the contains the types of variables for this object
+        /// </summary>
         private Dictionary<string,TYPE> m_varTypes;
+        /// <summary>
+        /// name
+        /// the name of the object
+        /// </summary>
+        private string m_name;
     }
 }

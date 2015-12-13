@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test_Engine_Interface.Project;
 using Test_Engine_Interface.Object;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 namespace Test_Engine_Interface
 {
+    [Serializable]
     public partial class TestEngineInterface : Form
     {
         //define vars
         GameProject project;
-
+        string m_filePath = null;
         public TestEngineInterface()
         {
             InitializeComponent();
@@ -51,8 +55,11 @@ namespace Test_Engine_Interface
         private void project_treeView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             //check to see which thing is selected and then open a menu accordingly
+
             //open object editor
-            ObjectForm of = new ObjectForm();
+            ObjectForm of = new ObjectForm(project.getObject(project_treeView.SelectedNode.Index),
+                project_treeView.SelectedNode.Index,this);
+            
             of.Visible = true;
         }
 
@@ -84,7 +91,71 @@ namespace Test_Engine_Interface
         //updaeObject-- updates the passed in object, meant to be used by object editor windows
         public void updateObject(GameObject gameObject, int index)
         {
+            project.updateObject(gameObject,index);
+            //now update the tree
+            project_treeView.Nodes[index].Text = gameObject.getName();
+        }
 
+        public void serialize()
+        {
+            if(m_filePath == null)
+            {
+                //open file chooser dialog to save the project
+                SaveFileDialog save = new SaveFileDialog();
+                DialogResult result = save.ShowDialog();
+                //store the choosen file path if on was accepted
+                if(result == DialogResult.OK)
+                {
+                    //stroe the file path and continue
+                    m_filePath = save.FileName;
+
+                }
+                else
+                {
+                    //dont do anything and return
+                    return;
+                }
+            }
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(m_filePath + ".tprg",
+                FileMode.Create, FileAccess.Write, FileShare.None);
+
+            formatter.Serialize(stream, this);
+        }
+
+        public void serializeAs()
+        {
+            string filepath;
+            //open file chooser dialog to save the project
+            SaveFileDialog save = new SaveFileDialog();
+            DialogResult result = save.ShowDialog();
+            //store the choosen file path if on was accepted
+            if (result == DialogResult.OK)
+            {
+                //stroe the file path and continue
+                filepath = save.FileName;
+
+            }
+            else
+            {
+                //dont do anything and return
+                return;
+            }
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(filepath + ".tprg",
+                FileMode.Create, FileAccess.Write, FileShare.None);
+
+            formatter.Serialize(stream, this);
+        }
+
+        public void open()
+        {
+            //open the file dialog
+            string filepath;
+            OpenFileDialog open = new OpenFileDialog();
+        
         }
     }
 }
