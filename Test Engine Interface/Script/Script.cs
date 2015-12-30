@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test_Engine_Interface.Object;
+using Test_Engine_Interface.Project;
+
 namespace Test_Engine_Interface.JR_Script
 {
     //Script-- a static class that contains methods and propertys for
@@ -43,7 +45,9 @@ namespace Test_Engine_Interface.JR_Script
             IF,
             DO,
             WHILE,
-            GLOBAL
+            GLOBAL,
+            OTHER,
+            END
            
         }
 
@@ -57,7 +61,7 @@ namespace Test_Engine_Interface.JR_Script
         //Write-- writes the passed in scipt out in in binary
         //script- the script to compile and write
         //fileout- the file to write out
-        public static void Write(string script,string fileout,GameObject go)
+        public static void Write(string script,string fileout,GameObject go,GameObject goo,GameProject project)
         {
             //set up list of bytes to be written out
             List<byte> binlist = new List<byte>();
@@ -66,207 +70,28 @@ namespace Test_Engine_Interface.JR_Script
 
             //break script into lines
             string[] lines = script.Split('\n');
-            for(int i = 0;i < lines.Count();i++)
+
+            //read each line
+            for(int i = 0;i < lines.Count(); i++)
             {
-                //read line
-                string[] argss = lines[i].Split(' ');
-
-                //add the number of args to the line
-                ARG size = new ARG();
-                size.m_type = Type.SIZE;
-                size.m_data = argss.Count();
-                //add size
-                args.Add(size);
-
-                //get the first
-                switch (argss[0])
+                //split args
+                string[] largs = lines[i].Split(' ');
+                switch(largs[0])
                 {
-                    case "do":
-                        {
-                           
-                            //read next arg as literal
-                            //write args
-                            ARG  arg1 = new ARG(), arg2 = new ARG(),argt = new ARG();
-                            arg1.m_data = null;
-                            arg1.m_type = Type.DO;
-                            arg2.m_type = Type.LITERAL;
-                            argt.m_type = Type.INT;
-                            argt.m_data = int.Parse(argss[0]);
-                            arg2.m_data = argt;
-                            args.Add(arg1);
-                            args.Add(arg2);
-
-                            //get how many lines there are
-                            int count = 0;
-                            bool flag = false;
-                            while(!flag)
-                            {
-                                string[] nargss = lines[i + count].Split(' ');
-                                if(nargss[0] == "end")
-                                {
-                                    flag = true;
-                                }
-
-                                count++;
-                            }
-
-                            //add the number of lines as a new argument to the end
-                            ARG linecount = new ARG();
-                            linecount.m_type = Type.SIZE;
-                            linecount.m_data = count;
-
-                            args.Add(linecount);
-                            break;
-                        }
-
-                    case "while":
-                        {
-                            //data is a while loop
-
-
-                            if (args.Count > 3)
-                            {
-                                //there is more then a single argument so get each one
-                                bool op = false;
-                                for (int index = 0; index < args.Count; index++)
-                                {
-                                    ARG arg1;
-                                    if (op)
-                                    {
-                                        arg1 = getOperator(argss[index], go);
-                                    }
-                                    else
-                                    {
-                                        arg1 = getArg(argss[index], go);
-                                    }
-
-                                    args.Add(arg1);
-                                }
-                            }
-                            else
-                            {
-                                //display a message box saying the was not enough arguments and return
-                                MessageBox.Show("Not enough arguments for while loop on line " + i+ " in script " + script);
-                                //return since there was an error parsing
-                                return;
-                            }
-
-                            //get how many lines there are
-                            int count = 0;
-                            bool flag = false;
-                            while (!flag)
-                            {
-                                string[] nargss = lines[i + count].Split(' ');
-                                if (nargss[0] == "end")
-                                {
-                                    flag = true;
-                                }
-
-                                count++;
-                            }
-
-                            //add the number of lines as a new argument to the end
-                            ARG linecount = new ARG();
-                            linecount.m_type = Type.SIZE;
-                            linecount.m_data = count;
-
-                            args.Add(linecount);
-                            break;
-                        }
-
                     case "if":
                         {
-                            //conditional statement
-                            if (args.Count > 3)
-                            {
-                                //there is more then a single argument so get each one
-                                bool op = false;
-                                for (int index = 0; index < args.Count; index++)
-                                {
-                                    ARG arg1;
-                                    if (op)
-                                    {
-                                        arg1 = getOperator(argss[index], go);
-                                    }
-                                    else
-                                    {
-                                        arg1 = getArg(argss[index], go);
-                                    }
-
-                                    args.Add(arg1);
-                                }
-
-                                //get how many lines there are
-                                int count = 0;
-                                bool flag = false;
-                                while (!flag)
-                                {
-                                    string[] nargss = lines[i + count].Split(' ');
-                                    if (nargss[0] == "end")
-                                    {
-                                        flag = true;
-                                    }
-
-                                    count++;
-                                }
-
-                                //add the number of lines as a new argument to the end
-                                ARG linecount = new ARG();
-                                linecount.m_type = Type.SIZE;
-                                linecount.m_data = count;
-
-                                args.Add(linecount);
-                            }
-                            else
-                            {
-                                //display a message box saying the was not enough arguments and return
-                                MessageBox.Show("Not enough arguments for if statement on line " + i + " in script " + script);
-                                //return since there was an error parsing
-                                return;
-                            }
-
-                            break;
-                        }
-
-                    default:
-                        {
-                            //it was either a comment or a variable so write the script accordingly
-                            if (argss[0][0] == '/' && argss[0][1] == '/')
-                            {
-                                //it was a comment so skip over this line
-                                break;
-                            }
-                            else
-                            {
-                                //it must have been a variable so read in the variable and arguments
-                                //there is more then a single argument so get each one
-                                bool op = false;
-                                for (int index = 0; index < args.Count; index++)
-                                {
-                                    ARG arg1;
-                                    if (op)
-                                    {
-                                        arg1 = getOperator(argss[index], go);
-                                    }
-                                    else
-                                    {
-                                        arg1 = getArg(argss[index], go);
-                                    }
-
-                                    args.Add(arg1);
-                                }
-                            }
-
-                            break;
+                            int section = 1;
+                            //defines conditional statement
+                            //check to see if there is special scope on it
                         }
                 }
-
-                
-    
-
             }
-
             
+
+        }
+
+        private static ARG[] getScope(GameObject go,GameObject goo,GameProject project)
+        {
 
         }
 
@@ -274,6 +99,9 @@ namespace Test_Engine_Interface.JR_Script
         {
             //prepare for binary writing
             BinaryWriter writer = new BinaryWriter(File.Open(fileout, FileMode.Create));
+
+            //write the number of arguments
+            writer.Write((long)args.Count());
 
             //write each of the arguments depending on there type
             for(int i = 0;i < args.Count();i++)
@@ -370,6 +198,7 @@ namespace Test_Engine_Interface.JR_Script
                             {
                                 string str = (string)argt.m_data;
                                 writer.Write((byte)Type.STRING);
+                                //write size of string
                                 writer.Write((byte)str.Count());
                                 writer.Write(str);
                             }
@@ -416,13 +245,29 @@ namespace Test_Engine_Interface.JR_Script
                         {
                             //data defines a while loop
                             writer.Write((byte)Type.WHILE);
-                            //write its address
-                            writer.Write((byte)args[i].m_data);
+                            //dont both writing anything else since the while loop does not contain anything else
+                            break;
+                        }
+                    case Type.OTHER:
+                        {
+                            //data defines other scope
+                            writer.Write((byte)Type.OTHER);
+                            //dont bother writting anything else since there was nothing else
+                            break;
+                        }
+                    case Type.END:
+                        {
+                            //data deifnes end of statement
+                            writer.Write((byte)Type.OTHER);
+                            //dont bother writing other data since there is nothing else
                             break;
                         }
 
                 }
             }
+
+            //close the writer
+            writer.Close();
 
         }
 

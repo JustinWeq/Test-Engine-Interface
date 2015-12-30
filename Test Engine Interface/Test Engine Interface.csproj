@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlobalsForm.Designer.cs">
+      <DependentUpon>GlobalsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ObjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GlobalsForm.resx">
+      <DependentUpon>GlobalsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ObjectForm.resx">
       <DependentUpon>ObjectForm.cs</DependentUpon>
     </EmbeddedResource>

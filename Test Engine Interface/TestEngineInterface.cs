@@ -227,5 +227,10 @@ namespace Test_Engine_Interface
             project_treeView.Nodes.Clear();
             project = new GameProject();
         }
+
+        public GameProject getProject()
+        {
+            return project;
+        }
     }
 }

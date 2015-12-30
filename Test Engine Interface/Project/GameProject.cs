@@ -28,7 +28,15 @@ namespace Test_Engine_Interface.Project
                ULTRA
             }
 
+            public struct Data
+            {
+                public object data;
+                public int address;
+            }
+
             public AA aa;
+            public Dictionary<string,Data> globals;
+           
         }
 
         //GameFiles-- the structure that contans information for the related files of the game
@@ -96,7 +104,6 @@ namespace Test_Engine_Interface.Project
             m_files = new GameFiles();
             m_data = new GameData();
             m_settings = new ProjectSettings();
-
             //set up game files
             m_files.levels = new List<GameLevel>();
             m_files.models = new List<string>();
@@ -129,6 +136,31 @@ namespace Test_Engine_Interface.Project
         public void addObject(GameObject gameObject)
         {
             m_files.objects.Add(gameObject);
+        }
+
+        public void clearGlobals()
+        {
+            //clear the list of globals
+            m_data.globals.Clear();
+        }
+
+        public void addGlobal(string name,object data)
+        {
+            GameData.Data dat = new GameData.Data();
+            dat.data = data;
+            dat.address = m_data.globals.Count  ;
+            m_data.globals.Add(name, dat);
+        }
+
+
+        public GameData.Data getGlobal(string name)
+        {
+            return m_data.globals[name];
+        }
+
+        public Dictionary<string,GameData.Data> getGlobals()
+        {
+            return m_data.globals;
         }
 
         public void updateObject(GameObject gameObject,int index)
