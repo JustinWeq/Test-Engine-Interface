@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="Level\GameLevel.cs" />
     <Compile Include="Object\GameObject.cs" />
+    <Compile Include="Object\ObjectEvent.cs" />
     <Compile Include="Project\GameProject.cs" />
     <Compile Include="Script\Script.cs" />
     <Compile Include="Serialization\Serializer.cs" />

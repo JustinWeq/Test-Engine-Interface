@@ -59,6 +59,7 @@
             this.save_button.TabIndex = 2;
             this.save_button.Text = "Save";
             this.save_button.UseVisualStyleBackColor = true;
+            this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
             // GlobalsForm
             // 

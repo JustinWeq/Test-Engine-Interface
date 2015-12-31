@@ -232,5 +232,13 @@ namespace Test_Engine_Interface
         {
             return project;
         }
+
+        private void globalSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //create new global variable
+            GlobalsForm glform = new GlobalsForm(this);
+            //make it visable
+            glform.Visible = true;
+        }
     }
 }

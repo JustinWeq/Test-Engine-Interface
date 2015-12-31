@@ -83,6 +83,7 @@ namespace Test_Engine_Interface.JR_Script
                             int section = 1;
                             //defines conditional statement
                             //check to see if there is special scope on it
+                            break;
                         }
                 }
             }
@@ -92,7 +93,7 @@ namespace Test_Engine_Interface.JR_Script
 
         private static ARG[] getScope(GameObject go,GameObject goo,GameProject project)
         {
-
+            return null;
         }
 
         private static void writeArguments(ARG[] args,string script,string fileout)

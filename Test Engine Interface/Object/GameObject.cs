@@ -22,6 +22,7 @@ namespace Test_Engine_Interface.Object
             BYTE,
             CHAR,
             BOOL,
+            LONG,
         }
 
         public enum ObjectType

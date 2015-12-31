@@ -111,6 +111,8 @@ namespace Test_Engine_Interface.Project
             m_files.scripts = new List<string>();
             m_files.sounds = new List<GameSound>();
             m_files.textures = new List<string>();
+            //set up globals
+            m_data.globals = new Dictionary<string, GameData.Data>();
         }
 
         public void setReleaseType(ProjectSettings.ReleaseType type)
