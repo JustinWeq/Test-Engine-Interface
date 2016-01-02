@@ -85,5 +85,93 @@ namespace Test_Engine_Interface.Object
             /// </summary>
             DESTROY
         }
+
+        /// <summary>
+        /// states the diffrent keys can be in
+        /// </summary>
+        enum KEYS
+        {
+            ESC,
+            F1,
+            F2,
+            F3,
+            F4,
+            F5,
+            F6,
+            F7,
+            F8,
+            F9,
+            TAB,
+            ENTER,
+            LEFTSHIFT,
+            RIGHTSHIFT,
+            LEFTCRTL,
+            RIGHTCRTL,
+            LEFTALT,
+            RIGHTALT,
+            FORWARDSLASH,
+            BACKWARDSLASH,
+            ONE,
+            TWO,
+            THREE,
+            FOUR,
+            FIVE,
+            SIX,
+            SEVEN,
+            EIGHT,
+            NINE,
+            ZERO,
+            PLUS,
+            MINUS,
+            Q,
+            W,
+            E,
+            R,
+            T,
+            Y,
+            U,
+            I,
+            O,
+            P,
+            A,
+            S,
+            D,
+            F,
+            G,
+            H,
+            J,
+            K,
+            L,
+            Z,
+            X,
+            C,
+            V,
+            B,
+            N,
+            M
+        }
+        
+        /// <summary>
+        /// contains values for the gamepad
+        /// </summary>
+        enum GAMEPAD
+        {
+            X,
+            A,
+            B,
+            Y,
+            START,
+            BACK,
+            RIGHTBUMPER,
+            LEFTBUMPER,
+            RIGHTTRIGGER,
+            LEFTTRIGGER,
+            LEFTJOYSTICK,
+            RIGHTJOYSTICK,
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT
+        }
     }
 }
